@@ -6,7 +6,7 @@ To run it:
 
 `docker run -d -p 8111:8111 -v /your/path:/data/teamcity devsu/teamcity-server:latest`
 
-Your teamcity server should be available at `http://localhost:8111`. You can change the port as needed, or use [https://github.com/jwilder/nginx-proxy](nginx-proxy) to map to a hostname.
+Your teamcity server should be available at `http://localhost:8111`. You can change the port as needed, or use [nginx-proxy](https://github.com/jwilder/nginx-proxy) to map to a hostname.
 
 You can also change the tag `latest` to match an specific version of teamcity.
 
