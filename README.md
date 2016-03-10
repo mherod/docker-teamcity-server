@@ -1,6 +1,6 @@
 # Teamcity docker images
 
-Docker images for running teamcity server and agents, built over Ubuntu 14.04.
+Docker images for running teamcity server and agents. Teamcity is an awesome continuous integration server from JetBrains.
 
 ## Teamcity Server
 
@@ -19,19 +19,23 @@ You can also change the tag `latest` to match an specific version of teamcity. Y
 #### Mysql Driver
 
 Mysql driver is included, but it's not loaded until:
+
 - You click on "Proceed" on the installation screen, so the folders are created.
 - You restart the container so the symlink to the driver is re-created. `docker restart teamcity-server`
 - You click on "Refresh JDBC drivers" button on the installation screen.
 
 ## Under the hood
 
-The images are built over Ubuntu 14.04.
+- The images are built from [java:8](https://github.com/docker-library/openjdk/blob/master/openjdk-8-jdk/Dockerfile) (installs unzip, openjdk-8-jdk)
+- Which is built from [buildpack-deps:jessie-scm](https://github.com/docker-library/buildpack-deps/blob/master/jessie/scm/Dockerfile) (installs bzr, git, mercurial, openssh-client, subversion, procps)
+- Which is built from [buildpack-deps:jessie-curl](https://github.com/docker-library/buildpack-deps/blob/master/jessie/curl/Dockerfile) (installs curl)
+- Which is built from **debian:jessie**
 
-The teamcity-server image has:
-- Utilities: git, wget, tar
-- Java 8
+On the server image we add:
+
+- Utilities: tar, software-properties-common
 - Mysql driver (to allow teamcity to connect to a mysql database)
-- Teamcity (obviously)
+- Teamcity Server (obviously)
 
 ## License
 

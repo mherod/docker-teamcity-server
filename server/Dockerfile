@@ -1,21 +1,10 @@
-FROM ubuntu:14.04
+FROM java:8
 MAINTAINER Cesar Salazar <csalazar@devsu.com>
 
 # Update and install some utils
 
 RUN apt-get update
-RUN apt-get -y install tar wget git software-properties-common
-
-# Java 8 (and mysql library for java)
-
-RUN echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | debconf-set-selections \
-&& add-apt-repository -y ppa:webupd8team/java \
-&& apt-get -y update \
-&& apt-get -y install oracle-java8-installer libmysql-java \
-&& rm -rf /var/lib/apt/lists/* \
-&& rm -rf /var/cache/oracle-jdk8-installer
-
-ENV JAVA_HOME /usr/lib/jvm/java-8-oracle
+RUN apt-get -y install tar software-properties-common libmysql-java
 
 # Teamcity
 
@@ -26,8 +15,6 @@ ENV TEAMCITY_DOWNLOAD http://download.jetbrains.com/teamcity
 RUN wget $TEAMCITY_DOWNLOAD/$TEAMCITY_PACKAGE && \
     tar zxf $TEAMCITY_PACKAGE -C /opt && \
     rm -rf $TEAMCITY_PACKAGE
-
-# TODO: Install libtcnative-1 (Apache Tomcat Native library) for better performance
 
 # Adding symlink to the mysql driver
 
