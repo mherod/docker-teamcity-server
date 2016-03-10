@@ -8,7 +8,7 @@ To run it:
 
 Your teamcity server should be available at `http://localhost:8111`. You can change the port as needed, or use [nginx-proxy](https://github.com/jwilder/nginx-proxy) to map to a hostname.
 
-You can also change the tag `latest` to match an specific version of teamcity.
+You can also change the tag `latest` to match an specific version of teamcity. You can find the available versions as tags in [Docker Hub](https://hub.docker.com/r/devsu/teamcity-server).
 
 ## Under the hood
 
