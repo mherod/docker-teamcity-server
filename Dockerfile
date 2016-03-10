@@ -27,7 +27,11 @@ RUN wget $TEAMCITY_DOWNLOAD/$TEAMCITY_PACKAGE && \
     tar zxf $TEAMCITY_PACKAGE -C /opt && \
     rm -rf $TEAMCITY_PACKAGE
 
-RUN mkdir -p /data/teamcity/lib/jdbc && ln -s /usr/share/java/mysql.jar /data/teamcity/lib/jdbc/mysql.jar
+# TODO: Install libtcnative-1 (Apache Tomcat Native library) for better performance
+
+# Adding symlink to the mysql driver
+
+RUN echo 'ln -sf /usr/share/java/mysql.jar /data/teamcity/lib/jdbc/mysql.jar' >> /opt/TeamCity/bin/teamcity-init.sh
 
 EXPOSE 8111
 VOLUME  ["/data/teamcity"]
