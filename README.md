@@ -1,6 +1,8 @@
-# Teamcity docker images
+# Teamcity Server docker images
 
 Docker images for running teamcity server and agents. Teamcity is an awesome continuous integration server from JetBrains.
+
+After creating a server, you will need agents. You can use [Teamcity Agent Docker Image](https://github.com/devsu/docker-teamcity-agent) to create one.
 
 ## Teamcity Server
 
@@ -16,6 +18,10 @@ Before running you can change the port as needed, or use [nginx-proxy](https://g
 
 You can also change the tag `latest` to match an specific version of teamcity. You can find the available versions as tags in [Docker Hub](https://hub.docker.com/r/devsu/teamcity-server).
 
+You can also clone this repo, change the docker file and build the image yourself.
+
+`docker built -t your-username/teamcity-server .`
+
 #### Mysql Driver
 
 Mysql driver is included, but it's not loaded until:
@@ -24,26 +30,6 @@ Mysql driver is included, but it's not loaded until:
 - You restart the container so the symlink to the driver is re-created. `docker restart teamcity-server`
 - You click on "Refresh JDBC drivers" button on the installation screen.
 
-## Teamcity Agent
-
-### Usage
-
-Make sure that your Teamcity Server is running. Then run:
-
-`docker run -d -P --name teamcity-agent-1 -v /your/path:/home/teamcity devsu/teamcity-agent:base`
-
-Since the agent is downloaded from the running teamcity server, you don't have to worry on matching the versions of the agents with the servers. Actually, the tags on the agents are related to the versions of the additional packages that it includes.
-
-You can take a look of the available variants at the tags page on Docker Hub.
-
-### Variants
-
-Since the agent can have many configurations, depending on the requirements, we have prepared a few images:
-
-#### Base
-
-It adds nothing but a script to download the agent from teamcity server, configure it and run it. Inspired on [centos7-teamcity-agent](https://bitbucket.org/ariya/docker-centos/src/2669cae3c4e7/centos7-teamcity-agent/?at=master).
-
 ## Under the hood
 
 - The images are built from [java:8](https://github.com/docker-library/openjdk/blob/master/openjdk-8-jdk/Dockerfile) (installs unzip, openjdk-8-jdk)
@@ -51,13 +37,11 @@ It adds nothing but a script to download the agent from teamcity server, configu
 - Which is built from [buildpack-deps:jessie-curl](https://github.com/docker-library/buildpack-deps/blob/master/jessie/curl/Dockerfile) (installs curl)
 - Which is built from **debian:jessie**
 
-On the server image we add:
+We add:
 
 - Utilities: tar, software-properties-common
 - Mysql driver (to allow teamcity to connect to a mysql database)
 - Teamcity Server (obviously)
-
-See the agent variants above to find out what is added to the agents.
 
 ## License
 
