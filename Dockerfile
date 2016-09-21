@@ -3,8 +3,9 @@ MAINTAINER Cesar Salazar <csalazar@devsu.com>
 
 # Update and install some utils
 
-RUN apt-get update
-RUN apt-get -y install tar software-properties-common libmysql-java
+RUN apt-get update \
+    && apt-get install -y tar software-properties-common libmysql-java \
+    && rm -rf /var/lib/apt/lists/*
 
 # Teamcity
 
