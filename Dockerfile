@@ -9,7 +9,7 @@ RUN apt-get -y install tar software-properties-common libmysql-java
 # Teamcity
 
 ENV TEAMCITY_DATA_PATH /data/teamcity
-ENV TEAMCITY_PACKAGE TeamCity-10.0.1.tar.gz
+ENV TEAMCITY_PACKAGE TeamCity-10.0.2.tar.gz
 ENV TEAMCITY_DOWNLOAD http://download.jetbrains.com/teamcity
 
 RUN wget $TEAMCITY_DOWNLOAD/$TEAMCITY_PACKAGE && \
