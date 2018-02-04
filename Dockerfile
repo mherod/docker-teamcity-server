@@ -5,11 +5,11 @@ ENV TEAMCITY_DATA_PATH /data/teamcity
 ENV TEAMCITY_PACKAGE TeamCity-2017.2.2.tar.gz
 ENV TEAMCITY_DOWNLOAD http://download.jetbrains.com/teamcity
 
-RUN wget $TEAMCITY_DOWNLOAD/$TEAMCITY_PACKAGE && \
+RUN wget –quiet $TEAMCITY_DOWNLOAD/$TEAMCITY_PACKAGE && \
     tar zxf $TEAMCITY_PACKAGE -C /opt && \
     rm -rf $TEAMCITY_PACKAGE
 
-RUN mkdir -rf /data/teamcity/lib/jdbc/
+RUN mkdir -p /data/teamcity/lib/jdbc/
 RUN cp -rf /usr/share/java/mysql.jar /data/teamcity/lib/jdbc/mysql.jar
 
 EXPOSE 8111
