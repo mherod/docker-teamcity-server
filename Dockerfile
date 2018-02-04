@@ -5,10 +5,9 @@ ENV TEAMCITY_DATA_PATH /data/teamcity
 ENV TEAMCITY_PACKAGE TeamCity-2017.2.2.tar.gz
 ENV TEAMCITY_DOWNLOAD http://download.jetbrains.com/teamcity
 
-RUN wget –quiet $TEAMCITY_DOWNLOAD/$TEAMCITY_PACKAGE && \
-    tar zxf $TEAMCITY_PACKAGE -C /opt && \
-    rm -rf $TEAMCITY_PACKAGE
-
+RUN wget $TEAMCITY_DOWNLOAD/$TEAMCITY_PACKAGE || ls $TEAMCITY_DOWNLOAD
+RUN tar zxf $TEAMCITY_PACKAGE -C /opt 
+RUN rm -rf $TEAMCITY_PACKAGE
 RUN mkdir -p /data/teamcity/lib/jdbc/
 RUN cp -rf /usr/share/java/mysql.jar /data/teamcity/lib/jdbc/mysql.jar
 
